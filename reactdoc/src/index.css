@@ -194,3 +194,136 @@ main {
     color: var(--text2-color);
   }
 }
+
+.product {
+  width: 27rem;
+  height: 35rem;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.product-img {
+  height: 25rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary-color);
+  cursor: zoom-in;
+}
+
+.product-info {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.product-name {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.price-section {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.discounted-price {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--secondary2-color);
+}
+
+.actual-price {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--text2-color);
+  opacity: 50%;
+  text-decoration: line-through;
+}
+
+.product-sold span:first-child {
+  font-size: 1.2rem;
+  color: var(--button-color);
+  font-weight: 500;
+}
+
+.product-sold span:nth-child(2) {
+  font-size: 1.6rem;
+  color: #ffad33;
+}
+
+.product {
+  position: relative;
+}
+
+.product::before {
+  content: "";
+  background-image: url(/assets/icons/itemheart.svg);
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 34px;
+  width: 34px;
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  top: 1.2rem;
+  right: 1.2rem;
+  cursor: pointer;
+}
+
+.product::after {
+  content: "";
+  background-image: url(/assets/icons/itemview.svg);
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 34px;
+  width: 34px;
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  top: 5.4rem;
+  right: 1.2rem;
+  cursor: pointer;
+}
+
+.product-sold span {
+  color: #000;
+}
+
+#swiper2 {
+  margin: 4rem 0;
+  width: 100%;
+  height: 35rem;
+}
+
+.product-button {
+  margin: auto;
+  width: 23.4rem;
+  height: 5.6rem;
+  background-color: var(--button2-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+}
+
+.product-button:hover {
+  background-color: var(--hover-button-color);
+}
+
+.product-button a {
+  color: var(--text-color);
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+#bestproducts {
+  display: flex;
+  gap: 3rem;
+}
