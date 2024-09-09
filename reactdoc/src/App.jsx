@@ -2,6 +2,8 @@ import Signup from "./components/signuppage";
 import Login from "./components/loginpage";
 import "./index.css";
 
+import { useState } from "react";
+
 let bestSellingProducts = [
   {
     productImage: "./bestsellingproducts/product1.png",
@@ -37,34 +39,59 @@ let bestSellingProducts = [
   },
 ];
 
-function App() {
-  let bestSellingProductsConverted = bestSellingProducts.map((product) => {
-    return (
-      <div className="product" key={product.id}>
-        <div className="product-img">
-          <img
-            loading="lazy"
-            src={product.productImage}
-            alt={product.productName}
-          />
-        </div>
-        <div className="product-info ">
-          <p className="product-name">{product.productName}</p>
-          <div className="price-section">
-            <div className="discounted-price">{product.discountedPrice}</div>
-            <p className="actual-price">{product.acutalPrice}</p>
-          </div>
-          <div className="product-sold">
-            <span>Items sold:</span> (<span>{product.itemsSold}</span>)
-          </div>
-        </div>
-      </div>
-    );
-  });
+function MyButton() {
+  let [count, setCount] = useState(0);
+
+  function clickHandle(e) {
+    count += 1;
+    setCount(count);
+    console.log(`Button was clicked ${count} times`);
+  }
 
   return (
     <>
-      <div>{bestSellingProductsConverted}</div>
+      <button className="product-button" onClick={clickHandle}>
+        My Button was clicked {count}
+      </button>
+    </>
+  );
+}
+
+function App() {
+  // adding lists in react
+  // let bestSellingProductsConverted = bestSellingProducts.map((product) => {
+  //   return (
+  //     <div className="product" key={product.id}>
+  //       <div className="product-img">
+  //         <img
+  //           loading="lazy"
+  //           src={product.productImage}
+  //           alt={product.productName}
+  //         />
+  //       </div>
+  //       <div className="product-info ">
+  //         <p className="product-name">{product.productName}</p>
+  //         <div className="price-section">
+  //           <div className="discounted-price">{product.discountedPrice}</div>
+  //           <p className="actual-price">{product.acutalPrice}</p>
+  //         </div>
+  //         <div className="product-sold">
+  //           <span>Items sold:</span> (<span>{product.itemsSold}</span>)
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // });
+  // return (
+  //   <>
+  //     <div>{bestSellingProductsConverted}</div>
+  //   </>
+  // );
+  // handling events in react
+  return (
+    <>
+      <MyButton />
+      <MyButton />
     </>
   );
 }
