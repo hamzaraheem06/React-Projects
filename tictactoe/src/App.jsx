@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-// it is a square component. it is taking props i.e. value and onClick from the parent component Board. Value is the value to be render in the UI, and onClick (handleClick) is a method that handles when a user click on any of the square
+// it is a square component. it is taking props i.e. value and onClick from the parent component Board. Value is the value to be render in the UI, and onClick (handleClick) is a method that handles when a user click on any of the square, it handles the rendering of game's move.
 function Square({ value, onClick }) {
   return (
     <>
@@ -16,18 +16,16 @@ function Square({ value, onClick }) {
 
 // this is the parent component that containes all the app, that would render on the  browser.
 function Board({ xIsNext, squares, onPlay }) {
-  const squaresCopy = squares.slice();
-  // this state containes an array that containes all the values of the respectives square. e.g squares[0] represents the value of the first square.
-  // this function handles the rendering of the X's and O's when a user clicks on the square.
-  // to track which <Square> is clicked, we pass an i prop from the parent container as can be seen in line 37.
+  const squaresCopy = squares.slice(); // the name justifies what this statement does. It creates a copy of the original array. The copied array is what will be rendered on the UI
+
+  // this function handles the rendering of the X's and O's when a user clicks on the square. To track which <Square> is clicked, we pass an i prop from the parent container as can be seen in line 37.
   function handleClick(i) {
-    // this checkes that if the square has already been filled or not. if the square is already filled it will exit from the function without doing anything.
+    // the following if statement checkes that if the square has already been filled or not or the game has ended . If the square is already filled or game has ended, it will exit from the handleClick function without doing anything.
     if (squaresCopy[i] !== null || calculateWinner(squares)) {
       return;
     }
 
     // the following if and else will alternate the turns.
-
     if (xIsNext) {
       squaresCopy[i] = "X";
     } else {
@@ -38,14 +36,12 @@ function Board({ xIsNext, squares, onPlay }) {
 
   // this part work on displaying who is the winner
 
-  let status;
-  let winner = calculateWinner(squares);
+  let status; // It guides the players, and displays the winning message.
+  let winner = calculateWinner(squares); // this is called after every move to check the winner. The squares param is the array containing the current state of the game. It is passed from the Game component.
 
   if (winner !== null) {
     status = `${winner} is the winner!`;
-  } /* else if (winner === null) {
-    status = `It is a draw`;
-  } */ else {
+  } else {
     status = `It is ${xIsNext ? "X" : "O"} \'s turn`;
   }
 
@@ -122,6 +118,7 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 
 function calculateWinner(squares) {
+  // the lines array containes all the possible winning combination of the game.
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -132,6 +129,8 @@ function calculateWinner(squares) {
     [0, 4, 8],
     [2, 4, 6],
   ];
+
+  // this loop takes the all the winning combos one by one, and checks if the values on the that particular squares are same or not, if they are same it will return the value i.e. X or O, else it will return null marking game not finished or a draw.
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
@@ -142,23 +141,24 @@ function calculateWinner(squares) {
 }
 
 function Game() {
-  let [xIsNext, setXIsNext] = useState(true);
-  let [history, setHistory] = useState([Array(9).fill(null)]);
-  let [currentMove, setCurrentMove] = useState(0);
-  let currentSquares = history[currentMove];
+  let [xIsNext, setXIsNext] = useState(true); // contains the track of turn of players.
+  let [history, setHistory] = useState([Array(9).fill(null)]); // this is what makes the timeline functionality work. It containes an array, which contains all the record of moves in the form of array.
+  let [currentMove, setCurrentMove] = useState(0); // the name is enough
+  let currentSquares = history[currentMove]; // name is enough for this too.
 
   function handlePlay(nextSquares) {
-    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares]; // this stores the new array array when a player makes a turn.
     setHistory(nextHistory);
-    setCurrentMove(nextHistory.length - 1);
+    setCurrentMove(nextHistory.length - 1); //
     setXIsNext(!xIsNext);
   }
 
   function jumpTo(nextMove) {
     setCurrentMove(nextMove);
     setXIsNext(nextMove % 2 === 0);
-  }
+  } // function that is called when we clicked on any state of the game.
 
+  // this converts the current move history into a li elements to display them in the ul in line 184
   let moves = history.map((square, move) => {
     let description;
     if (move > 0) {
