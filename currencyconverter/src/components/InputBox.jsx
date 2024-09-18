@@ -1,5 +1,6 @@
 import React, { useId } from "react";
 
+// The props are self-explainery, just understand where we are using them.
 function InputBox({
   label,
   amount,
@@ -11,6 +12,7 @@ function InputBox({
   isCurrencyDisable = false,
   className = "",
 }) {
+  // the useId hook creates a random id every time it is called. we are using this to bind the label and input element.
   const userInputId = useId();
 
   return (
@@ -20,18 +22,20 @@ function InputBox({
           htmlFor={userInputId}
           className="text-black/40 mb-2 inline-block"
         >
-          {label}
+          {label} {/* // lable variable is used here  */}
         </label>
         <input
           id={userInputId}
           className="outline-none w-full bg-transparent py-1.5"
           type="text"
           placeholder="Amount"
-          disabled={isAmountDisable}
+          disabled={
+            isAmountDisable
+          } /* // isAmountDisable variable is used here, which tell whether the input field can be change by the user. */
           value={amount}
-          onChange={(e) =>
-            onAmountChange && onAmountChange(String(e.target.value))
-          }
+          onChange={
+            (e) => onAmountChange && onAmountChange(String(e.target.value)) // the onAmountChange function is defined at line 52 of App.jsx file
+          } // this method is run when we change the value of the input field, it displays the new value
           autoComplete="off"
         />
       </div>
@@ -41,8 +45,9 @@ function InputBox({
           className="rounded-lg px-1 py-1 text-lg bg-gray-100 cursor-pointer outline-none text-center"
           disabled={isCurrencyDisable}
           value={selectedCurrency}
-          onChange={(e) => onCurrencyChange && onCurrencyChange(e.target.value)}
+          onChange={(e) => onCurrencyChange && onCurrencyChange(e.target.value)} // this is defined at the line 69 ..nice of App.jsx
         >
+          {/* // this takes all the currency types and converts them into a dropdown list options */}
           {currencyOption.map((curr) => (
             <option key={curr} value={curr}>
               {curr}
@@ -54,4 +59,4 @@ function InputBox({
   );
 }
 
-export default InputBox;
+export default InputBox; // exporting this to the index.js in the current folder.
