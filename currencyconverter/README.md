@@ -1,8 +1,13 @@
-# React + Vite
+# Currency Exchange using the React.js
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+It uses real-time conversion rate for each currency using the api call declared in the custom hook named **useCurrencyInfo**.
 
-Currently, two official plugins are available:
+## To understand the code, follow these steps.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Start with **_src/hooks/useCurrencyInfo.js_**.
+
+- After that, go to **_src/components/InputBox.jsx_**, which is the reusable input element.
+
+- Finally, come to the **_src/App.jsx_**, which is the main app we will render on the browser.
+
+Now you understand the currency convertor using the react javascript library.
