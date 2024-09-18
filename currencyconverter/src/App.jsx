@@ -7,13 +7,14 @@ import { InputBox } from "./components";
 import useCurrencyInfo from "./hooks/useCurrencyInfo";
 
 function App() {
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(""); // sets the value of user input component
   const [from, setFrom] = useState("usd");
   const [to, setTo] = useState("pkr");
-  const currencyInfo = useCurrencyInfo(from);
-  const [convertedAmount, setConvertedAmount] = useState(0);
-  const options = Object.keys(currencyInfo);
+  const currencyInfo = useCurrencyInfo(from); // gets the details of currency exchange rate using the custom hook
+  const [convertedAmount, setConvertedAmount] = useState(0); // sets the value of output component
+  const options = Object.keys(currencyInfo); // holds all the currency names
 
+  // this function swaps the values of the fields when the button is clicked.
   function swap() {
     setFrom(to);
     setTo(from);
@@ -21,6 +22,7 @@ function App() {
     setConvertedAmount(amount);
   }
 
+  // this function converts the values of inputs
   function convert() {
     setConvertedAmount((amount * currencyInfo[to]).toFixed(3));
   }
@@ -38,10 +40,12 @@ function App() {
             onSubmit={(e) => {
               e.preventDefault();
               convert();
-            }}
+            }} // when a form is submitted it goes to a url or a page. we are stopping that and calling our exchange function
           >
             <div className="w-full mb-1">
               <InputBox
+                b
+                // passing props to the components
                 label="From"
                 amount={amount}
                 currencyOption={options}
@@ -63,6 +67,7 @@ function App() {
             </div>
             <div className="w-full mt-1 mb-4">
               <InputBox
+                // passing props to the components
                 label="To"
                 amount={convertedAmount}
                 currencyOption={options}
